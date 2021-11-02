@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CanvasApp</string>
+    <string name="app_title">Canvas</string>
+    <string name="tools_option_text">Tools</string>
+</resources>
