@@ -9,7 +9,7 @@ import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import com.github.alekseygett.canvasapp.R
 import com.github.alekseygett.canvasapp.feature.canvas.ui.CanvasViewState
-import java.lang.Math.abs
+import kotlin.math.abs
 
 class DrawView @JvmOverloads constructor(
     context: Context,
@@ -45,8 +45,6 @@ class DrawView @JvmOverloads constructor(
     private val touchTolerance = ViewConfiguration.get(context).scaledTouchSlop
 
     private var path = Path()
-    private val drawing = Path()
-    private val currentPath = Path()
 
     private var onClick: () -> Unit = {}
 
@@ -63,6 +61,8 @@ class DrawView @JvmOverloads constructor(
         extraCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         invalidate()
     }
+
+    fun getBitmap(): Bitmap? = if (::extraBitmap.isInitialized) extraBitmap else null
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         motionTouchEventX = event.x
@@ -92,8 +92,6 @@ class DrawView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         canvas.drawBitmap(extraBitmap, 0f, 0f, null)
-        canvas.drawPath(drawing, paint)
-        canvas.drawPath(currentPath, paint)
     }
 
     private fun touchStart() {
@@ -126,10 +124,7 @@ class DrawView @JvmOverloads constructor(
         invalidate()
     }
 
-    private fun touchEnd() {
-        drawing.addPath(currentPath)
-        currentPath.reset()
-    }
+    private fun touchEnd() { }
 
     private fun updateCurrentCoordinates() {
         currentX = motionTouchEventX
@@ -137,13 +132,3 @@ class DrawView @JvmOverloads constructor(
     }
 
 }
-
-//    fun render(state: CanvasViewState) {
-//        drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
-//        paint.color = drawColor
-//    }
-//
-//    fun clear() {
-//        extraCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-//        invalidate()
-//    }

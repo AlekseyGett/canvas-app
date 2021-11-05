@@ -9,4 +9,15 @@
         android:icon="@drawable/tools_icon"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/clear"
+        android:title="@string/clear_option_text"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/save"
+        android:title="@string/save_option_text"
+        app:showAsAction="never" />
+
 </menu>
