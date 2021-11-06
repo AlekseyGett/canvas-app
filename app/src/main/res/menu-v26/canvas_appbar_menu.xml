@@ -7,12 +7,16 @@
         android:id="@+id/colors"
         android:title="@string/colors_option_text"
         android:icon="@drawable/palette_icon"
+        android:iconTint="@color/white"
+        android:iconTintMode="src_in"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/lineWeights"
         android:title="@string/line_weights_option_text"
         android:icon="@drawable/line_weights_icon"
+        android:iconTint="@color/white"
+        android:iconTintMode="src_in"
         app:showAsAction="ifRoom" />
 
     <item

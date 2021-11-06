@@ -17,13 +17,10 @@ class DrawView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    companion object {
-        private const val STROKE_WIDTH = 12f
-    }
-
     private lateinit var extraBitmap: Bitmap
     private lateinit var extraCanvas: Canvas
 
+    private var strokeWidth = resources.getDimension(R.dimen.medium_stroke_width)
     private var drawColor = ResourcesCompat.getColor(resources, R.color.black, null)
 
     private val paint = Paint().apply {
@@ -34,7 +31,7 @@ class DrawView @JvmOverloads constructor(
         style = Paint.Style.STROKE
         strokeJoin = Paint.Join.ROUND
         strokeCap = Paint.Cap.ROUND
-        strokeWidth = STROKE_WIDTH
+        strokeWidth = strokeWidth
     }
 
     private var motionTouchEventX = 0f
@@ -53,6 +50,9 @@ class DrawView @JvmOverloads constructor(
     }
 
     fun render(state: CanvasViewState) {
+        strokeWidth = resources.getDimension(state.lineWeight.value)
+        paint.strokeWidth = strokeWidth
+
         drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
         paint.color = drawColor
     }

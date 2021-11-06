@@ -4,10 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/drawable/circle.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/drawable/line_weights_icon.xml" value="1.9916666666666667" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/drawable/palette_icon.xml" value="0.3828125" />
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/drawable/tools_icon.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/fragment_canvas.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/item_color.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/item_line_weight.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/item_palette.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/item_stroke.xml" value="0.29907407407407405" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/item_stroke_width.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/layout/view_tools.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/menu-v26/canvas_appbar_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CanvasApp/app/src/main/res/menu/canvas_appbar_menu.xml" value="0.36666666666666664" />
       </map>
     </option>

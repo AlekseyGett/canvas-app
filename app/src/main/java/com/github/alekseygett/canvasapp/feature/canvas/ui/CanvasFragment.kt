@@ -2,7 +2,6 @@ package com.github.alekseygett.canvasapp.feature.canvas.ui
 
 import android.Manifest
 import android.content.ContentValues
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
@@ -14,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
@@ -29,7 +29,8 @@ import java.io.OutputStream
 class CanvasFragment : Fragment() {
 
     companion object {
-        private const val PALETTE = 0
+        private const val COLOR_TOOLBAR_INDEX = 0
+        private const val SIZE_TOOLBAR_INDEX = 1
 
         fun getInstance() = CanvasFragment()
     }
@@ -42,7 +43,7 @@ class CanvasFragment : Fragment() {
         if (isGranted) {
             saveCanvas()
         } else {
-            showErrorMessage("The write permission needed")
+            showErrorMessage(R.string.storage_permission_error)
         }
     }
 
@@ -52,7 +53,10 @@ class CanvasFragment : Fragment() {
         get() = _binding!!
 
     private val toolsLayouts: List<ToolsLayout> by lazy {
-        listOf(requireActivity().findViewById(R.id.palette))
+        listOf(
+            requireActivity().findViewById(R.id.colorsToolbar),
+            requireActivity().findViewById(R.id.sizesToolbar)
+        )
     }
 
     override fun onCreateView(
@@ -72,14 +76,21 @@ class CanvasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolsLayouts[PALETTE].setOnClickListener {
+        toolsLayouts[COLOR_TOOLBAR_INDEX].setOnClickListener {
             viewModel.processUiEvent(UiEvent.OnColorClick(it))
+        }
+
+        toolsLayouts[SIZE_TOOLBAR_INDEX].setOnClickListener {
+            viewModel.processUiEvent(UiEvent.OnLineWeightClick(it))
         }
 
         binding.appBar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.tools -> {
-                    viewModel.processUiEvent(UiEvent.OnToolsClick)
+                R.id.colors -> {
+                    viewModel.processUiEvent(UiEvent.OnColorsButtonClick)
+                }
+                R.id.lineWeights -> {
+                    viewModel.processUiEvent(UiEvent.OnLineWeightsButtonClick)
                 }
                 R.id.clear -> {
                     binding.drawView.clear()
@@ -98,9 +109,14 @@ class CanvasFragment : Fragment() {
     }
 
     private fun render(viewState: ViewState) {
-        toolsLayouts[PALETTE].let { paletteLayout ->
-            paletteLayout.isGone = !viewState.isPaletteVisible
+        toolsLayouts[COLOR_TOOLBAR_INDEX].let { paletteLayout ->
+            paletteLayout.isGone = !viewState.isColorsToolbarVisible
             paletteLayout.render(viewState.colors)
+        }
+
+        toolsLayouts[SIZE_TOOLBAR_INDEX].let { strokeWidthLayout ->
+            strokeWidthLayout.isGone = !viewState.isLineWeightsToolbarVisible
+            strokeWidthLayout.render(viewState.lineWeights)
         }
 
         binding.drawView.render(viewState.canvasViewState)
@@ -127,7 +143,8 @@ class CanvasFragment : Fragment() {
 
     private fun getCanvasBitmap(): Bitmap? = binding.drawView.getBitmap()
 
-    private fun showErrorMessage(errorMessage: String) {
+    private fun showErrorMessage(@StringRes stringRes: Int) {
+        val errorMessage = resources.getString(stringRes)
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
     }
 

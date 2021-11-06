@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">CanvasApp</string>
-    <string name="app_title">Canvas</string>
-    <string name="tools_option_text">Tools</string>
-    <string name="clear_option_text">Clear canvas</string>
+
+    <string name="colors_option_text">Tools</string>
+    <string name="line_weights_option_text">Tools</string>
+    <string name="clear_option_text">Clear</string>
     <string name="save_option_text">Save</string>
+
+    <string name="storage_permission_error">Storage permission needed</string>
 </resources>
